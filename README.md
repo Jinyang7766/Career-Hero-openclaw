@@ -5,6 +5,17 @@
 - 前端：Next.js
 - 后端：FastAPI
 
+## 最新移动端截图（Wave14）
+
+> 截图目录：`docs/screenshots/wave14-no-indicator/`
+
+![Wave14 首页](docs/screenshots/wave14-no-indicator/01-home.png)
+![Wave14 简历页](docs/screenshots/wave14-no-indicator/02-resumes.png)
+![Wave14 RAG 页](docs/screenshots/wave14-no-indicator/03-rag.png)
+![Wave14 面试页](docs/screenshots/wave14-no-indicator/04-interview.png)
+![Wave14 面试总结页](docs/screenshots/wave14-no-indicator/05-interview-summary.png)
+![Wave14 登录页](docs/screenshots/wave14-no-indicator/06-login.png)
+
 ---
 
 ## 1) 项目结构
@@ -235,20 +246,7 @@ npm run build
 
 ---
 
-## 8) 最新移动端截图（Wave14）
-
-> 截图目录：`docs/screenshots/wave14-no-indicator/`
-
-![Wave14 首页](docs/screenshots/wave14-no-indicator/01-home.png)
-![Wave14 简历页](docs/screenshots/wave14-no-indicator/02-resumes.png)
-![Wave14 RAG 页](docs/screenshots/wave14-no-indicator/03-rag.png)
-![Wave14 面试页](docs/screenshots/wave14-no-indicator/04-interview.png)
-![Wave14 面试总结页](docs/screenshots/wave14-no-indicator/05-interview-summary.png)
-![Wave14 登录页](docs/screenshots/wave14-no-indicator/06-login.png)
-
----
-
-## 9) 相关文档
+## 8) 相关文档
 
 - `docs/release-checklist.md`：上线前检查清单
 - `docs/rollback-runbook.md`：回滚与应急操作手册

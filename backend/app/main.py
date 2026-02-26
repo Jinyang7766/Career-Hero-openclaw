@@ -2601,8 +2601,9 @@ async def observability_middleware(request: Request, call_next):
     request.state.exception_type = None
 
     started_at = time.perf_counter()
+    is_preflight_request = request.method.upper() == "OPTIONS"
 
-    if inbound_session_id and not validate_session_id(inbound_session_id):
+    if inbound_session_id and not is_preflight_request and not validate_session_id(inbound_session_id):
         inbound_session_id = ""
         set_error_context(request, error_code="BAD_REQUEST", exception_type="InvalidSessionId")
 
@@ -2613,6 +2614,7 @@ async def observability_middleware(request: Request, call_next):
     if (
         not inbound_session_id
         and session_required
+        and not is_preflight_request
         and not is_public_path(request.url.path)
         and getattr(request.state, "exception_type", None) != "InvalidSessionId"
     ):
@@ -2638,7 +2640,7 @@ async def observability_middleware(request: Request, call_next):
             request.state.session_scope_id = f"session:{session_id}"
             request.state.owner_scope_id = request.state.session_scope_id
 
-    if auth_token:
+    if auth_token and not is_preflight_request:
         auth_session = validate_auth_session(token=auth_token, session_id=session_id)
         if auth_session is None:
             if get_auth_mode() != "token" and is_login_required_path(request.url.path):
@@ -2737,7 +2739,7 @@ async def observability_middleware(request: Request, call_next):
             )
         )
 
-    if get_auth_mode() != "token" and is_login_required_path(request.url.path) and get_current_user(request) is None:
+    if not is_preflight_request and get_auth_mode() != "token" and is_login_required_path(request.url.path) and get_current_user(request) is None:
         set_error_context(request, error_code="AUTH_LOGIN_REQUIRED", exception_type="AuthLoginRequired")
         return finalize(
             JSONResponse(
@@ -2750,7 +2752,7 @@ async def observability_middleware(request: Request, call_next):
             )
         )
 
-    if not is_public_path(request.url.path):
+    if not is_preflight_request and not is_public_path(request.url.path):
         if get_auth_mode() == "token":
             expected_token = get_expected_api_token()
             provided_token = parse_request_token(request)

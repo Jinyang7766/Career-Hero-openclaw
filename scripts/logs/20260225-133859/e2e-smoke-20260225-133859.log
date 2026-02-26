@@ -1,0 +1,8 @@
+# e2e smoke
+
+## STDOUT
+
+[FAIL] /api/history/{id}: 404 {'code': 'NOT_FOUND', 'message': 'history item not found', 'requestId': 'bab6f122-37f2-468f-bf27-1af115dab5ec'}
+
+## STDERR
+

@@ -1,0 +1,43 @@
+................................F.F.                                     [100%]
+================================== FAILURES ===================================
+________________ test_wave5_auth_login_chain_contract_and_flow ________________
+
+    def test_wave5_auth_login_chain_contract_and_flow() -> None:
+        spec = _openapi()
+        required = [
+            ("post", "/api/auth/session/guest"),
+            ("get", "/api/auth/session/current"),
+            ("post", "/api/auth/session/refresh"),
+            ("post", "/api/auth/session/logout"),
+        ]
+    
+        missing = [
+            f"{method.upper()} {path}"
+            for method, path in required
+            if method not in spec.get("paths", {}).get(path, {})
+        ]
+>       assert not missing, (
+            "Wave5 blocker: auth session/login chain APIs missing from OpenAPI: "
+            + ", ".join(missing)
+        )
+E       AssertionError: Wave5 blocker: auth session/login chain APIs missing from OpenAPI: POST /api/auth/session/guest, GET /api/auth/session/current, POST /api/auth/session/refresh, POST /api/auth/session/logout
+E       assert not ['POST /api/auth/session/guest', 'GET /api/auth/session/current', 'POST /api/auth/session/refresh', 'POST /api/auth/session/logout']
+
+tests\test_prd_followup_gate.py:494: AssertionError
+____________ test_wave5_knowledge_update_delete_contract_and_flow _____________
+
+    def test_wave5_knowledge_update_delete_contract_and_flow() -> None:
+        spec = _openapi()
+        path, update_method, delete_method = _find_knowledge_update_delete_path(spec)
+>       assert path and update_method and delete_method, (
+            "Wave5 blocker: knowledge update/delete APIs missing. "
+            "Require PUT/PATCH + DELETE on /api/rag/knowledge/{id}."
+        )
+E       AssertionError: Wave5 blocker: knowledge update/delete APIs missing. Require PUT/PATCH + DELETE on /api/rag/knowledge/{id}.
+E       assert (None)
+
+tests\test_prd_followup_gate.py:621: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_prd_followup_gate.py::test_wave5_auth_login_chain_contract_and_flow
+FAILED tests/test_prd_followup_gate.py::test_wave5_knowledge_update_delete_contract_and_flow
+2 failed, 34 passed in 2.24s

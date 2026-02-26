@@ -1,0 +1,247 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f4f7ff 0%, #eef3ff 100%);
+}
+
+.main {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 14px 12px 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.headerCard,
+.card {
+  border: 1px solid #dbe4f5;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.headerCard {
+  background: linear-gradient(160deg, #f8fbff 0%, #ffffff 70%);
+}
+
+.badge,
+.stepBadge {
+  margin: 0;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: #eaf2ff;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.title {
+  margin: 10px 0 0;
+  font-size: 27px;
+  color: #0f172a;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.headerActions {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.stepHead {
+  display: grid;
+  gap: 6px;
+}
+
+.stepHead h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.stepHead p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.subHeading {
+  margin: 14px 0 8px;
+  font-size: 16px;
+}
+
+.label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  padding: 12px;
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.actions,
+.actionsInline {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.primaryButton,
+.secondaryButton,
+.warnButton,
+.linkChip,
+.primaryLink {
+  min-height: 48px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primaryButton,
+.primaryLink {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.warnButton {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.linkChip {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled,
+.warnButton:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+.error {
+  margin: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #b91c1c;
+}
+
+.empty,
+.meta {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.list,
+.versionList {
+  margin: 12px 0 0;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.listItem,
+.versionItem {
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 10px;
+  background: #f8fafc;
+  display: grid;
+  gap: 8px;
+}
+
+.itemButton {
+  width: 100%;
+  text-align: left;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.itemButton span {
+  color: #475569;
+  font-size: 13px;
+}
+
+.detail {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.detail p {
+  margin: 0;
+  color: #334155;
+}
+
+.versionHeader {
+  display: grid;
+  gap: 8px;
+}
+
+.versionHeader p {
+  margin: 0;
+  color: #334155;
+  font-size: 13px;
+}
+
+.developerCard {
+  background: #f8fafc;
+}
+
+@media (min-width: 761px) {
+  .main {
+    padding: 18px 16px 34px;
+  }
+}

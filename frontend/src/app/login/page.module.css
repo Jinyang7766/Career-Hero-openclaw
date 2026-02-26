@@ -1,0 +1,179 @@
+.page {
+  min-height: 100%;
+}
+
+.main {
+  display: grid;
+  gap: 12px;
+}
+
+.headerCard,
+.card {
+  border: 1px solid #dbe4f5;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.headerCard {
+  background: linear-gradient(160deg, #f8fbff 0%, #ffffff 70%);
+}
+
+.badge {
+  margin: 0;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: #eaf2ff;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.title {
+  margin: 10px 0 0;
+  font-size: 27px;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.headerActions {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.linkChip,
+.primaryButton,
+.secondaryButton,
+.warnButton {
+  min-height: 48px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkChip {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.primaryButton {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.warnButton {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled,
+.warnButton:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+.sectionHead {
+  display: grid;
+  gap: 5px;
+}
+
+.sectionHead h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.sectionHead p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 12px;
+  font-size: 15px;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.actions {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.banner {
+  margin: 0;
+  border-radius: 12px;
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.success,
+.meta {
+  margin-top: 10px;
+  color: #0f766e;
+  font-size: 13px;
+}
+
+.meta {
+  color: #64748b;
+}
+
+.error {
+  margin-top: 10px;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+.summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.developerCard {
+  background: #f8fafc;
+}

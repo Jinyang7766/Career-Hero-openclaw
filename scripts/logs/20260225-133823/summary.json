@@ -1,0 +1,7 @@
+{
+  "Step": "backend pytest",
+  "Status": "PASS",
+  "ExitCode": 0,
+  "DurationSec": 3.08,
+  "LogFile": "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260225-133823\\backend-pytest-20260225-133823.log"
+}

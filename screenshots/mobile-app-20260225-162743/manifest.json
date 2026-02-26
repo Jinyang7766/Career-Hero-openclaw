@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-02-25T16:27:54.044193",
+  "frontendBaseUrl": "http://127.0.0.1:3100",
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "outDir": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\mobile-app-20260225-162743",
+  "screenshots": [
+    {
+      "route": "/",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\mobile-app-20260225-162743\\01-home.png"
+    },
+    {
+      "route": "/resumes",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\mobile-app-20260225-162743\\02-resumes.png"
+    },
+    {
+      "route": "/rag",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\mobile-app-20260225-162743\\03-rag.png"
+    },
+    {
+      "route": "/interview",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\mobile-app-20260225-162743\\04-interview.png"
+    },
+    {
+      "route": "/interview/summary",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\mobile-app-20260225-162743\\05-interview-summary.png"
+    },
+    {
+      "route": "/login",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\mobile-app-20260225-162743\\06-login.png"
+    }
+  ]
+}

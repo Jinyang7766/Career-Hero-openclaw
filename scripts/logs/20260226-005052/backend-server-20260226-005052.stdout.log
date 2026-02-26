@@ -1,0 +1,6 @@
+INFO:     127.0.0.1:54151 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54154 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54155 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54156 - "POST /api/rag/knowledge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54157 - "POST /api/rag/knowledge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54158 - "POST /api/analyze HTTP/1.1" 401 Unauthorized

@@ -1,0 +1,168 @@
+.page {
+  min-height: 100%;
+}
+
+.main {
+  display: grid;
+  gap: 12px;
+}
+
+.headerCard,
+.card {
+  border: 1px solid #dbe4f5;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.headerCard {
+  background: linear-gradient(160deg, #f8fbff 0%, #ffffff 70%);
+}
+
+.badge {
+  margin: 0;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: #eaf2ff;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.title {
+  margin: 10px 0 0;
+  font-size: 27px;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.headerActions {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.linkChip,
+.primaryButton,
+.secondaryButton {
+  min-height: 48px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkChip {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.primaryButton {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.itemButton {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #dbe2ee;
+  background: #f8fafc;
+  color: #334155;
+  padding: 10px;
+  text-align: left;
+  display: grid;
+  gap: 4px;
+}
+
+.itemActive {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.45) inset;
+}
+
+.summaryBox {
+  margin-top: 10px;
+  border: 1px solid #dbe2ee;
+  border-radius: 14px;
+  background: #f8fafc;
+  padding: 12px;
+  white-space: pre-wrap;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.actions {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.meta,
+.empty,
+.notice,
+.error {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.meta,
+.empty {
+  color: #64748b;
+}
+
+.notice {
+  color: #1d4ed8;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.devPanel {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed #cbd5e1;
+}
+
+.summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #1e293b;
+}

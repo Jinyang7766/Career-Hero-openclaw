@@ -1,0 +1,7 @@
+INFO:     Started server process [22192]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+{"path": "/health", "method": "GET", "status": 200, "duration_ms": 1, "requestId": "0f6fd075-2859-438d-9eca-6a507d03a184", "sessionId": "c2cfab56-beb7-47ba-a7e9-7be990da6e33", "error_code": null, "exception_type": null}
+{"path": "/health", "method": "GET", "status": 200, "duration_ms": 1, "requestId": "700dbc38-d3cb-4126-a9a9-c20f0b62ab7a", "sessionId": "5a9b5b32-b507-40fe-8ee3-126c0fdc06d4", "error_code": null, "exception_type": null}
+{"path": "/api/rag/knowledge", "method": "POST", "status": 401, "duration_ms": 0, "requestId": "e2e-knowledge-1", "sessionId": "f0aca28a-78c3-4a9a-9ea4-b497e9e741fd", "error_code": "AUTH_LOGIN_REQUIRED", "exception_type": "AuthLoginRequired"}

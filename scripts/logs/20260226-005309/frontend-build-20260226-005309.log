@@ -1,0 +1,36 @@
+﻿# frontend build
+
+## STDOUT
+
+
+> frontend@0.1.0 build
+> next build
+
+鈻?Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+鉁?Compiled successfully in 3.3s
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/9) ...
+  Generating static pages using 11 workers (2/9) 
+  Generating static pages using 11 workers (4/9) 
+  Generating static pages using 11 workers (6/9) 
+鉁?Generating static pages using 11 workers (9/9) in 814.1ms
+  Finalizing page optimization ...
+
+Route (app)
+鈹?鈼?/
+鈹?鈼?/_not-found
+鈹?鈼?/interview
+鈹?鈼?/interview/summary
+鈹?鈼?/login
+鈹?鈼?/rag
+鈹?鈼?/resumes
+
+
+鈼? (Static)  prerendered as static content
+
+
+## STDERR
+

@@ -1,0 +1,93 @@
+{
+  "generatedAt": "2026-02-25T14:54:46.249248",
+  "frontendBaseUrl": "http://127.0.0.1:3000",
+  "backendBaseUrl": "http://127.0.0.1:8000",
+  "authenticated": true,
+  "authUser": "demo",
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "status": "PASS"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "url": "http://127.0.0.1:3000/",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-145445\\01-home.png",
+      "status": "PASS",
+      "duration_ms": 1484,
+      "expected_text": [
+        "Career Hero MVP",
+        "分析输入"
+      ],
+      "missing_text": [],
+      "notes": []
+    },
+    {
+      "route": "/resumes",
+      "url": "http://127.0.0.1:3000/resumes",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-145445\\02-resumes.png",
+      "status": "PASS",
+      "duration_ms": 1357,
+      "expected_text": [
+        "Resume 管理",
+        "简历列表"
+      ],
+      "missing_text": [],
+      "notes": []
+    },
+    {
+      "route": "/rag",
+      "url": "http://127.0.0.1:3000/rag",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-145445\\03-rag.png",
+      "status": "PASS",
+      "duration_ms": 1367,
+      "expected_text": [
+        "RAG / 知识库管理",
+        "知识条目列表"
+      ],
+      "missing_text": [],
+      "notes": []
+    },
+    {
+      "route": "/interview",
+      "url": "http://127.0.0.1:3000/interview",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-145445\\04-interview.png",
+      "status": "PASS",
+      "duration_ms": 1372,
+      "expected_text": [
+        "Interview 练习",
+        "开始会话"
+      ],
+      "missing_text": [],
+      "notes": []
+    },
+    {
+      "route": "/interview/summary",
+      "url": "http://127.0.0.1:3000/interview/summary",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-145445\\05-interview-summary.png",
+      "status": "PASS",
+      "duration_ms": 1338,
+      "expected_text": [
+        "面试最终总结页",
+        "会话列表"
+      ],
+      "missing_text": [],
+      "notes": []
+    },
+    {
+      "route": "/login",
+      "url": "http://127.0.0.1:3000/login",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-145445\\06-login.png",
+      "status": "PASS",
+      "duration_ms": 1372,
+      "expected_text": [
+        "登录 / 退出",
+        "登录表单"
+      ],
+      "missing_text": [],
+      "notes": []
+    }
+  ]
+}

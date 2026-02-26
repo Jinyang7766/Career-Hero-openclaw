@@ -1,0 +1,9 @@
+﻿# e2e smoke
+
+## STDOUT
+
+[PASS] interview list/detail/pause/resume
+[PASS] e2e smoke checks completed (analyze + rag + interview + history)
+
+## STDERR
+

@@ -1,0 +1,8 @@
+﻿# e2e smoke
+
+## STDOUT
+
+[FAIL] /health: 0 <urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>
+
+## STDERR
+

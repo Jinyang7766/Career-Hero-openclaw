@@ -1,0 +1,486 @@
+.FFFF........F...FFFF.FFFFFF..FF..FF.FFF......                           [100%]
+================================== FAILURES ===================================
+_______________ test_analyze_success_writes_history_and_detail ________________
+
+    def test_analyze_success_writes_history_and_detail() -> None:
+        analyze_request_id = "req-day4-1"
+        analyze_resp = client.post(
+            "/api/analyze",
+            json=make_payload(),
+            headers={"x-request-id": analyze_request_id, "x-session-id": "session-a"},
+        )
+        assert analyze_resp.status_code == 200
+        data = analyze_resp.json()
+    
+        assert isinstance(data["score"], int)
+        assert isinstance(data["historyId"], int)
+        assert data["requestId"] == analyze_request_id
+        assert data["analysisSource"] in {"rule", "gemini"}
+        assert isinstance(data["fallbackUsed"], bool)
+        assert data["promptVersion"] == main_module.PROMPT_VERSION
+    
+        history_resp = client.get("/api/history?limit=20", headers={"x-request-id": "req-history-read-1"})
+>       assert history_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:95: AssertionError
+______________ test_history_request_id_filter_and_default_limit _______________
+
+    def test_history_request_id_filter_and_default_limit() -> None:
+        session_headers = {"x-session-id": "session-history-batch"}
+    
+        for i in range(25):
+            resp = client.post(
+                "/api/analyze",
+                json=make_payload(i),
+                headers={**session_headers, "x-request-id": f"req-history-{i}"},
+            )
+            assert resp.status_code == 200
+    
+        default_limit_resp = client.get("/api/history", headers=session_headers)
+>       assert default_limit_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:128: AssertionError
+_______________ test_history_cleanup_keep_latest_and_delete_all _______________
+
+    def test_history_cleanup_keep_latest_and_delete_all() -> None:
+        for i in range(5):
+            resp = client.post("/api/analyze", json=make_payload(i))
+            assert resp.status_code == 200
+    
+        keep_resp = client.post(
+            "/api/history/cleanup",
+            json={"mode": "keep_latest", "keepLatest": 2},
+        )
+>       assert keep_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:149: AssertionError
+__________________________ test_export_txt_json_pdf ___________________________
+
+    def test_export_txt_json_pdf() -> None:
+        resp = client.post("/api/analyze", json=make_payload())
+        assert resp.status_code == 200
+        history_id = resp.json()["historyId"]
+    
+        txt = client.get(f"/api/history/{history_id}/export?format=txt")
+>       assert txt.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:172: AssertionError
+____________ test_minimal_e2e_chain_analyze_history_detail_export _____________
+
+    def test_minimal_e2e_chain_analyze_history_detail_export() -> None:
+        analyze = client.post("/api/analyze", json=make_payload(), headers={"x-session-id": "session-e2e"})
+        assert analyze.status_code == 200
+        history_id = analyze.json()["historyId"]
+    
+        history = client.get("/api/history?limit=5")
+>       assert history.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:353: AssertionError
+______________________ test_history_list_limit_is_capped ______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000253578A0850>
+
+    def test_history_list_limit_is_capped(monkeypatch) -> None:
+        monkeypatch.setattr(main_module, "MAX_HISTORY_LIMIT", 5)
+    
+        for i in range(8):
+            resp = client.post("/api/analyze", json=make_payload(i))
+            assert resp.status_code == 200
+    
+        history = client.get("/api/history?limit=999")
+>       assert history.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:423: AssertionError
+__________________ test_history_detail_invalid_and_not_found __________________
+
+    def test_history_detail_invalid_and_not_found() -> None:
+        invalid = client.get("/api/history/0")
+>       assert invalid.status_code == 400
+E       assert 401 == 400
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:431: AssertionError
+__________ test_history_cleanup_validation_error_keep_latest_bounds ___________
+
+    def test_history_cleanup_validation_error_keep_latest_bounds() -> None:
+        resp = client.post("/api/history/cleanup", json={"mode": "keep_latest", "keepLatest": 0})
+>       assert resp.status_code == 422
+E       assert 401 == 422
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:441: AssertionError
+______________ test_history_export_not_found_and_invalid_format _______________
+
+    def test_history_export_not_found_and_invalid_format() -> None:
+        missing = client.get("/api/history/9999/export?format=txt")
+>       assert missing.status_code == 404
+E       assert 401 == 404
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:447: AssertionError
+_______________________ test_resume_crud_and_versioning _______________________
+
+    def test_resume_crud_and_versioning() -> None:
+        create_resp = client.post(
+            "/api/resumes",
+            json={"title": "后端工程师简历", "content": "3年 FastAPI + SQLite 经验"},
+        )
+>       assert create_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:479: AssertionError
+__________ test_resume_update_without_new_version_overwrites_latest ___________
+
+    def test_resume_update_without_new_version_overwrites_latest() -> None:
+        create_resp = client.post(
+            "/api/resumes",
+            json={"title": "算法简历", "content": "熟悉 Python 与算法"},
+        )
+>       assert create_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:516: AssertionError
+_______________ test_resume_endpoints_validation_and_not_found ________________
+
+    def test_resume_endpoints_validation_and_not_found() -> None:
+        invalid_create = client.post("/api/resumes", json={"title": "", "content": "x"})
+>       assert invalid_create.status_code == 422
+E       assert 401 == 422
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:533: AssertionError
+____________________ test_analyze_rag_mode_switch_and_topk ____________________
+
+    def test_analyze_rag_mode_switch_and_topk() -> None:
+        knowledge_payloads = [
+            {
+                "title": "Redis 高并发实践",
+                "content": "使用 Redis + FastAPI 构建限流与缓存，提升接口稳定性与吞吐。",
+                "tags": ["redis", "fastapi", "backend"],
+                "source": "manual",
+            },
+            {
+                "title": "监控告警体系",
+                "content": "Prometheus + Grafana 监控 Python 服务，覆盖 Docker 部署环境。",
+                "tags": ["monitoring", "docker", "python"],
+                "source": "manual",
+            },
+            {
+                "title": "SQL 性能优化",
+                "content": "针对 SQL 查询慢问题进行索引优化，并结合 Redis 做热点缓存。",
+                "tags": ["sql", "redis", "optimization"],
+                "source": "manual",
+            },
+        ]
+    
+        for item in knowledge_payloads:
+            created = client.post("/api/rag/knowledge", json=item)
+>           assert created.status_code == 200
+E           assert 401 == 200
+E            +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:577: AssertionError
+__________ test_session_isolation_for_rate_limit_and_history_detail ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025357665450>
+
+    def test_session_isolation_for_rate_limit_and_history_detail(monkeypatch) -> None:
+        monkeypatch.setattr(
+            main_module,
+            "RATE_LIMITER",
+            main_module.SessionRateLimiter(
+                limit=2,
+                window_seconds=60,
+                duplicate_limit=2,
+                duplicate_window_seconds=60,
+            ),
+        )
+    
+        payload = make_payload(501)
+    
+        s1_h1 = client.post(
+            "/api/analyze",
+            json=payload,
+            headers={"x-session-id": "session-isolation-a", "x-request-id": "req-iso-a-1"},
+        )
+        assert s1_h1.status_code == 200
+    
+        s1_h2 = client.post(
+            "/api/analyze",
+            json=payload,
+            headers={"x-session-id": "session-isolation-a", "x-request-id": "req-iso-a-2"},
+        )
+        assert s1_h2.status_code == 200
+    
+        s1_blocked = client.post(
+            "/api/analyze",
+            json=payload,
+            headers={"x-session-id": "session-isolation-a", "x-request-id": "req-iso-a-3"},
+        )
+        assert s1_blocked.status_code == 429
+        assert_error_shape(s1_blocked.json(), expected_code="TOO_MANY_REQUESTS")
+    
+        s2_ok = client.post(
+            "/api/analyze",
+            json=payload,
+            headers={"x-session-id": "session-isolation-b", "x-request-id": "req-iso-b-1"},
+        )
+        assert s2_ok.status_code == 200
+    
+        first_detail = client.get(
+            f"/api/history/{s1_h1.json()['historyId']}",
+            headers={"x-session-id": "session-isolation-a"},
+        )
+>       assert first_detail.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:668: AssertionError
+__________ test_interview_list_detail_pause_resume_and_answer_chain ___________
+
+    def test_interview_list_detail_pause_resume_and_answer_chain() -> None:
+        session_headers = {
+            "x-request-id": "req-interview-chain-create",
+            "x-session-id": "session-interview-owner-a",
+        }
+    
+        create_resp = client.post(
+            "/api/interview/session/create",
+            json={
+                "jdText": "岗位要求：Python FastAPI SQL Docker Redis",
+                "resumeText": "3年后端开发，熟悉 Python FastAPI SQL Docker。",
+                "questionCount": 3,
+            },
+            headers=session_headers,
+        )
+>       assert create_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:698: AssertionError
+_______________ test_knowledge_audit_fields_created_and_updated _______________
+
+    def test_knowledge_audit_fields_created_and_updated() -> None:
+        client.cookies.clear()
+    
+        create_resp = client.post(
+            "/api/rag/knowledge",
+            json={
+                "title": "Wave6 审计字段验证",
+                "content": "初始内容：Redis + FastAPI",
+                "tags": ["redis", "fastapi"],
+                "source": "wave6-audit",
+            },
+            headers={"x-request-id": "req-wave6-knowledge-create"},
+        )
+>       assert create_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:952: AssertionError
+_____________________ test_interview_summary_result_chain _____________________
+
+    def test_interview_summary_result_chain() -> None:
+        client.cookies.clear()
+    
+        headers = {
+            "x-session-id": "session-interview-summary-owner",
+            "x-request-id": "req-interview-summary-create",
+        }
+    
+        create_resp = client.post(
+            "/api/interview/session/create",
+            json={
+                "jdText": "岗位要求：Python FastAPI SQL Docker Redis",
+                "resumeText": "4年后端开发，熟悉 Python FastAPI SQL Docker。",
+                "questionCount": 3,
+            },
+            headers=headers,
+        )
+>       assert create_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_api.py:1009: AssertionError
+___________ test_interview_session_api_minimal_chain_when_supported ___________
+
+    def test_interview_session_api_minimal_chain_when_supported() -> None:
+        spec = _openapi()
+        create_path, detail_path, turn_path = _find_interview_paths(spec)
+        if not create_path:
+            pytest.skip("Interview session API is not exposed in current OpenAPI paths")
+    
+        create_operation = spec["paths"][create_path]["post"]
+        create_payload_schema = _extract_json_schema(spec, create_operation)
+        create_payload = _build_min_value(spec, create_payload_schema) if create_payload_schema else {}
+        if not isinstance(create_payload, dict):
+            create_payload = {}
+    
+        create_resp = client.post(create_path, json=create_payload)
+>       assert create_resp.status_code in {200, 201}, create_resp.text
+E       AssertionError: {"code":"AUTH_LOGIN_REQUIRED","message":"login required","requestId":"d9076269-4acb-4618-97fb-e5ad98c41e49"}
+E       assert 401 in {200, 201}
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_prd_followup_gate.py:288: AssertionError
+___________ test_interview_list_detail_pause_resume_when_supported ____________
+
+    def test_interview_list_detail_pause_resume_when_supported() -> None:
+        spec = _openapi()
+        create_path, list_path, detail, pause, resume = _find_interview_lifecycle_paths(spec)
+    
+        missing = [
+            name
+            for name, value in (
+                ("create", create_path),
+                ("list", list_path),
+                ("detail", detail),
+                ("pause", pause),
+                ("resume", resume),
+            )
+            if value is None
+        ]
+        if missing:
+            pytest.skip(f"interview list/detail/pause/resume APIs not fully exposed: missing {', '.join(missing)}")
+    
+        create_operation = spec["paths"][create_path]["post"]
+        create_schema = _extract_json_schema(spec, create_operation)
+        create_payload = _build_min_value(spec, create_schema) if create_schema else {}
+        if not isinstance(create_payload, dict):
+            create_payload = {}
+    
+        create_resp = client.post(create_path, json=create_payload)
+>       assert create_resp.status_code in {200, 201}, create_resp.text
+E       AssertionError: {"code":"AUTH_LOGIN_REQUIRED","message":"login required","requestId":"48948537-6691-4d10-a1ff-3ce2ae9b268d"}
+E       assert 401 in {200, 201}
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_prd_followup_gate.py:387: AssertionError
+_____________ test_wave5_session_isolation_history_and_interview ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002535784F790>
+
+    def test_wave5_session_isolation_history_and_interview(monkeypatch) -> None:
+        monkeypatch.setenv("CAREER_HERO_SESSION_ISOLATION_ENABLED", "true")
+    
+        headers_a = {"x-session-id": "wave5-session-a", "x-request-id": "wave5-iso-a"}
+        headers_b = {"x-session-id": "wave5-session-b", "x-request-id": "wave5-iso-b"}
+    
+        analyze_a = client.post("/api/analyze", json=make_payload(701), headers=headers_a)
+        assert analyze_a.status_code == 200
+        history_id_a = analyze_a.json()["historyId"]
+    
+        analyze_b = client.post("/api/analyze", json=make_payload(702), headers=headers_b)
+        assert analyze_b.status_code == 200
+        history_id_b = analyze_b.json()["historyId"]
+    
+        history_a = client.get("/api/history?limit=20", headers=headers_a)
+>       assert history_a.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_prd_followup_gate.py:558: AssertionError
+____________ test_wave5_knowledge_update_delete_contract_and_flow _____________
+
+    def test_wave5_knowledge_update_delete_contract_and_flow() -> None:
+        spec = _openapi()
+        path, update_method, delete_method = _find_knowledge_update_delete_path(spec)
+        assert path and update_method and delete_method, (
+            "Wave5 blocker: knowledge update/delete APIs missing. "
+            "Require PUT/PATCH + DELETE on /api/rag/knowledge/{id}."
+        )
+    
+        create_resp = client.post(
+            "/api/rag/knowledge",
+            json={
+                "title": "Wave5 Knowledge Base v1",
+                "content": "使用 Redis + FastAPI 进行缓存与限流。",
+                "tags": ["redis", "fastapi"],
+                "source": "manual",
+            },
+        )
+>       assert create_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_prd_followup_gate.py:631: AssertionError
+_______________ test_wave5_interview_history_finished_sessions ________________
+
+    def test_wave5_interview_history_finished_sessions() -> None:
+        owner_headers = {
+            "x-session-id": "wave5-interview-owner-1",
+            "x-request-id": "wave5-interview-history-create",
+        }
+    
+        create_resp = client.post(
+            "/api/interview/session/create",
+            json={
+                "jdText": "岗位要求：Python FastAPI SQL Docker Redis",
+                "resumeText": "4年后端开发经验，熟悉 Python FastAPI SQL Docker。",
+                "questionCount": 3,
+            },
+            headers=owner_headers,
+        )
+>       assert create_resp.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_prd_followup_gate.py:687: AssertionError
+============================== warnings summary ===============================
+app\main.py:2589
+  G:\AI_project\career-hero-mvp-next-fastapi\backend\app\main.py:2589: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+.venv\Lib\site-packages\fastapi\applications.py:4495
+  G:\AI_project\career-hero-mvp-next-fastapi\backend\.venv\Lib\site-packages\fastapi\applications.py:4495: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_api.py::test_analyze_success_writes_history_and_detail - as...
+FAILED tests/test_api.py::test_history_request_id_filter_and_default_limit - ...
+FAILED tests/test_api.py::test_history_cleanup_keep_latest_and_delete_all - a...
+FAILED tests/test_api.py::test_export_txt_json_pdf - assert 401 == 200
+FAILED tests/test_api.py::test_minimal_e2e_chain_analyze_history_detail_export
+FAILED tests/test_api.py::test_history_list_limit_is_capped - assert 401 == 200
+FAILED tests/test_api.py::test_history_detail_invalid_and_not_found - assert ...
+FAILED tests/test_api.py::test_history_cleanup_validation_error_keep_latest_bounds
+FAILED tests/test_api.py::test_history_export_not_found_and_invalid_format - ...
+FAILED tests/test_api.py::test_resume_crud_and_versioning - assert 401 == 200
+FAILED tests/test_api.py::test_resume_update_without_new_version_overwrites_latest
+FAILED tests/test_api.py::test_resume_endpoints_validation_and_not_found - as...
+FAILED tests/test_api.py::test_analyze_rag_mode_switch_and_topk - assert 401 ...
+FAILED tests/test_api.py::test_session_isolation_for_rate_limit_and_history_detail
+FAILED tests/test_api.py::test_interview_list_detail_pause_resume_and_answer_chain
+FAILED tests/test_api.py::test_knowledge_audit_fields_created_and_updated - a...
+FAILED tests/test_api.py::test_interview_summary_result_chain - assert 401 ==...
+FAILED tests/test_prd_followup_gate.py::test_interview_session_api_minimal_chain_when_supported
+FAILED tests/test_prd_followup_gate.py::test_interview_list_detail_pause_resume_when_supported
+FAILED tests/test_prd_followup_gate.py::test_wave5_session_isolation_history_and_interview
+FAILED tests/test_prd_followup_gate.py::test_wave5_knowledge_update_delete_contract_and_flow
+FAILED tests/test_prd_followup_gate.py::test_wave5_interview_history_finished_sessions
+22 failed, 24 passed, 2 warnings in 5.30s

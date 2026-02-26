@@ -1,0 +1,23 @@
+﻿[
+    {
+        "Step":  "backend pytest",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationSec":  5.17,
+        "LogFile":  "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260226-004226\\backend-pytest-20260226-004226.log"
+    },
+    {
+        "Step":  "frontend build",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationSec":  10.1,
+        "LogFile":  "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260226-004226\\frontend-build-20260226-004226.log"
+    },
+    {
+        "Step":  "e2e smoke",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationSec":  3.08,
+        "LogFile":  "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260226-004226\\e2e-smoke-20260226-004226.log"
+    }
+]

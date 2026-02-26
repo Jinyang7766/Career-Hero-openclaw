@@ -1,0 +1,68 @@
+INFO:     Started server process [592]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+{"path": "/health", "method": "GET", "status": 200, "duration_ms": 1, "requestId": "a690ca69-cbda-49c1-8d75-30ca70eac067", "sessionId": "5bfab80a-da69-4da5-924a-d2c23c9ca6e2", "error_code": null, "exception_type": null}
+{"path": "/health", "method": "GET", "status": 200, "duration_ms": 0, "requestId": "31995b0f-379a-440d-ab17-da8fd7509ca4", "sessionId": "004b992f-75ea-4b32-aa41-3a58ee5142b4", "error_code": null, "exception_type": null}
+{"path": "/api/auth/login", "method": "POST", "status": 200, "duration_ms": 86, "requestId": "e2e-auth-login", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/rag/knowledge", "method": "POST", "status": 200, "duration_ms": 9, "requestId": "e2e-knowledge-1", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/rag/knowledge", "method": "POST", "status": 200, "duration_ms": 6, "requestId": "e2e-knowledge-2", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 0, "from": "*", "to": "analyzing", "reason": "analyze_started"}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 0, "from": "analyzing", "to": "report", "reason": "analyze_finished", "historyId": 36, "requestId": "e2e-analyze-off"}
+{"path": "/api/analyze", "method": "POST", "status": 200, "duration_ms": 18, "requestId": "e2e-analyze-off", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 0, "from": "*", "to": "analyzing", "reason": "analyze_started"}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 0, "from": "analyzing", "to": "report", "reason": "analyze_finished", "historyId": 37, "requestId": "e2e-analyze-on"}
+{"path": "/api/analyze", "method": "POST", "status": 200, "duration_ms": 17, "requestId": "e2e-analyze-on", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/history", "method": "GET", "status": 200, "duration_ms": 4, "requestId": "e2e-history-list", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/history/36", "method": "GET", "status": 200, "duration_ms": 2, "requestId": "e2e-history-detail", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/history/36/export", "method": "GET", "status": 200, "duration_ms": 2, "requestId": "e2e-history-export", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 22, "from": "created", "to": "active", "degraded": false, "requestId": "e2e-interview-create"}
+{"path": "/api/interview/session/create", "method": "POST", "status": 200, "duration_ms": 10, "requestId": "e2e-interview-create", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/openapi.json", "method": "GET", "status": 200, "duration_ms": 45, "requestId": "095bdeed-cbed-4389-b47e-5a5179204a24", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/interview/sessions", "method": "GET", "status": 200, "duration_ms": 3, "requestId": "e2e-interview-lifecycle-list", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_restore", "ownerScopeId": "user:1", "sessionId": 22, "status": "active", "requestId": "e2e-interview-lifecycle-detail"}
+{"path": "/api/interview/sessions/22", "method": "GET", "status": 200, "duration_ms": 3, "requestId": "e2e-interview-lifecycle-detail", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 22, "from": "active", "to": "paused", "requestId": "e2e-interview-lifecycle-pause"}
+{"path": "/api/interview/session/22/pause", "method": "POST", "status": 200, "duration_ms": 8, "requestId": "e2e-interview-lifecycle-pause", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 22, "from": "paused", "to": "active", "requestId": "e2e-interview-lifecycle-resume"}
+{"path": "/api/interview/session/22/resume", "method": "POST", "status": 200, "duration_ms": 9, "requestId": "e2e-interview-lifecycle-resume", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/interview/session/22/next", "method": "POST", "status": 200, "duration_ms": 2, "requestId": "e2e-interview-next", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_persisted", "ownerScopeId": "user:1", "sessionId": 22, "action": "answer", "from": "active", "to": "active", "currentIndex": 0, "nextIndex": 1, "requestId": "e2e-interview-answer"}
+{"path": "/api/interview/session/22/answer", "method": "POST", "status": 200, "duration_ms": 10, "requestId": "e2e-interview-answer", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 22, "from": "active", "to": "finished", "requestId": "e2e-interview-finish"}
+{"path": "/api/interview/session/22/finish", "method": "POST", "status": 200, "duration_ms": 9, "requestId": "e2e-interview-finish", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "resume_content_updated", "ownerScopeId": "user:1", "resumeId": 4, "contentUpdatedAt": "2026-02-25T16:56:10.380Z", "diagnosticStatus": "jd_input", "requestId": "e2e-prd-resume-create"}
+{"path": "/api/resumes", "method": "POST", "status": 200, "duration_ms": 16, "requestId": "e2e-prd-resume-create", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "resume_content_updated", "ownerScopeId": "user:1", "resumeId": 4, "contentUpdatedAt": "2026-02-25T16:56:10.423Z", "diagnosticStatus": "jd_input", "requestId": "e2e-prd-resume-update"}
+{"path": "/api/resumes/4", "method": "PUT", "status": 200, "duration_ms": 14, "requestId": "e2e-prd-resume-update", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 4, "from": "*", "to": "analyzing", "reason": "analyze_started"}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 4, "from": "analyzing", "to": "report", "reason": "analyze_finished", "historyId": 38, "requestId": "e2e-prd-analyze-latest-default"}
+{"path": "/api/analyze", "method": "POST", "status": 200, "duration_ms": 16, "requestId": "e2e-prd-analyze-latest-default", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 4, "from": "*", "to": "analyzing", "reason": "analyze_started"}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 4, "from": "analyzing", "to": "report", "reason": "analyze_finished", "historyId": 39, "requestId": "e2e-prd-analyze-latest-explicit"}
+{"path": "/api/analyze", "method": "POST", "status": 200, "duration_ms": 17, "requestId": "e2e-prd-analyze-latest-explicit", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 4, "from": "*", "to": "analyzing", "reason": "analyze_started"}
+{"event": "diagnostic_state_transition", "ownerScopeId": "user:1", "resumeId": 4, "from": "analyzing", "to": "report", "reason": "analyze_finished", "historyId": 40, "requestId": "e2e-prd-analyze-old-version"}
+{"path": "/api/analyze", "method": "POST", "status": 200, "duration_ms": 17, "requestId": "e2e-prd-analyze-old-version", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/history/38", "method": "GET", "status": 200, "duration_ms": 3, "requestId": "e2e-prd-history-latest-default", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/history/39", "method": "GET", "status": 200, "duration_ms": 2, "requestId": "e2e-prd-history-latest-explicit", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/history/40", "method": "GET", "status": 200, "duration_ms": 2, "requestId": "e2e-prd-history-old", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 23, "from": "created", "to": "active", "degraded": false, "requestId": "e2e-prd-interview-create-a"}
+{"path": "/api/interview/session/create", "method": "POST", "status": 200, "duration_ms": 7, "requestId": "e2e-prd-interview-create-a", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 24, "from": "created", "to": "active", "degraded": false, "requestId": "e2e-prd-interview-create-b"}
+{"path": "/api/interview/session/create", "method": "POST", "status": 200, "duration_ms": 9, "requestId": "e2e-prd-interview-create-b", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_persisted", "ownerScopeId": "user:1", "sessionId": 23, "action": "answer", "from": "active", "to": "active", "currentIndex": 0, "nextIndex": 1, "requestId": "e2e-prd-interview-answer-a"}
+{"path": "/api/interview/session/23/answer", "method": "POST", "status": 200, "duration_ms": 8, "requestId": "e2e-prd-interview-answer-a", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_restore", "ownerScopeId": "user:1", "sessionId": 23, "status": "active", "requestId": "e2e-prd-interview-detail-a"}
+{"path": "/api/interview/sessions/23", "method": "GET", "status": 200, "duration_ms": 3, "requestId": "e2e-prd-interview-detail-a", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_restore", "ownerScopeId": "user:1", "sessionId": 24, "status": "active", "requestId": "e2e-prd-interview-detail-b"}
+{"path": "/api/interview/sessions/24", "method": "GET", "status": 200, "duration_ms": 3, "requestId": "e2e-prd-interview-detail-b", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 23, "from": "active", "to": "paused", "requestId": "e2e-prd-interview-pause-a"}
+{"path": "/api/interview/session/23/pause", "method": "POST", "status": 200, "duration_ms": 9, "requestId": "e2e-prd-interview-pause-a", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/interview/session/23/answer", "method": "POST", "status": 400, "duration_ms": 2, "requestId": "e2e-prd-interview-paused-answer", "sessionId": "e2e-smoke-auth", "error_code": "BAD_REQUEST", "exception_type": "HTTPException"}
+{"path": "/api/interview/sessions", "method": "GET", "status": 200, "duration_ms": 4, "requestId": "e2e-prd-interview-list", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_restore", "ownerScopeId": "user:1", "sessionId": 23, "status": "paused", "requestId": "e2e-prd-interview-detail-after-pause"}
+{"path": "/api/interview/sessions/23", "method": "GET", "status": 200, "duration_ms": 3, "requestId": "e2e-prd-interview-detail-after-pause", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"event": "interview_state_transition", "ownerScopeId": "user:1", "sessionId": 25, "from": "created", "to": "active", "degraded": false, "requestId": "e2e-prd-interview-jd-only"}
+{"path": "/api/interview/session/create", "method": "POST", "status": 200, "duration_ms": 7, "requestId": "e2e-prd-interview-jd-only", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/resumes", "method": "GET", "status": 200, "duration_ms": 4, "requestId": "e2e-prd-resume-list", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}

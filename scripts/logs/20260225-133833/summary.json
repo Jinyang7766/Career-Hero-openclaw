@@ -1,0 +1,7 @@
+{
+  "Step": "frontend build",
+  "Status": "FAIL",
+  "ExitCode": 1,
+  "DurationSec": 9.06,
+  "LogFile": "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260225-133833\\frontend-build-20260225-133833.log"
+}

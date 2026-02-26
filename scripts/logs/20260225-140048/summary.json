@@ -1,0 +1,7 @@
+{
+  "Step": "e2e smoke",
+  "Status": "PASS",
+  "ExitCode": 0,
+  "DurationSec": 1.07,
+  "LogFile": "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260225-140048\\e2e-smoke-20260225-140048.log"
+}

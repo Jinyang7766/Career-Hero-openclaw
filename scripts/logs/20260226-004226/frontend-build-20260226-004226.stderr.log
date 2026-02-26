@@ -1,0 +1,14 @@
+⨯ useSearchParams() should be wrapped in a suspense boundary at page "/404". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    at Q (G:\AI_project\career-hero-mvp-next-fastapi\frontend\.next\server\chunks\ssr\node_modules_cf1f3d2c._.js:2:2111)
+    at o (G:\AI_project\career-hero-mvp-next-fastapi\frontend\.next\server\chunks\ssr\node_modules_cf1f3d2c._.js:4:5284)
+    at j (G:\AI_project\career-hero-mvp-next-fastapi\frontend\.next\server\chunks\ssr\[root-of-the-server]__1ee52e66._.js:1:3432)
+    at an (G:\AI_project\career-hero-mvp-next-fastapi\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84360)
+    at ai (G:\AI_project\career-hero-mvp-next-fastapi\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86179)
+    at ai (G:\AI_project\career-hero-mvp-next-fastapi\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:104708)
+    at al (G:\AI_project\career-hero-mvp-next-fastapi\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:107953)
+    at as (G:\AI_project\career-hero-mvp-next-fastapi\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105368)
+    at am (G:\AI_project\career-hero-mvp-next-fastapi\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:112882)
+    at ai (G:\AI_project\career-hero-mvp-next-fastapi\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:98808)
+Error occurred prerendering page "/_not-found". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /_not-found/page: /_not-found, exiting the build.
+⨯ Next.js build worker exited with code: 1 and signal: null

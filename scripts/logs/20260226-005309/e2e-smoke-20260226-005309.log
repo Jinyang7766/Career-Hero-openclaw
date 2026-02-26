@@ -1,0 +1,13 @@
+﻿# e2e smoke
+
+## STDOUT
+
+[PASS] interview list/detail/pause/resume
+[PASS] resume latest-version default selection
+[PASS] interview progress isolation + lock-state re-entry
+[PASS] interview start entry (JD-only degraded path)
+[PASS] resume last-modified contract check executed
+[PASS] e2e smoke checks completed (analyze + rag + interview + history + prd-v2-regression)
+
+## STDERR
+

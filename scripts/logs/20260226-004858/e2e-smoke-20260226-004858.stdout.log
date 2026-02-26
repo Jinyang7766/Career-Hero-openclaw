@@ -1,0 +1,1 @@
+[FAIL] /api/rag/knowledge #1: 401 {'code': 'AUTH_LOGIN_REQUIRED', 'message': 'login required', 'requestId': 'e2e-knowledge-1'}

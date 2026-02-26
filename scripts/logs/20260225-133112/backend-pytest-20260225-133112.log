@@ -1,0 +1,283 @@
+# backend pytest
+
+## STDOUT
+
+...........................F..FFFFFF                                     [100%]
+================================== FAILURES ===================================
+__________ test_interview_list_detail_pause_resume_and_answer_chain ___________
+
+    def test_interview_list_detail_pause_resume_and_answer_chain() -> None:
+        session_headers = {
+            "x-request-id": "req-interview-chain-create",
+            "x-session-id": "session-interview-owner-a",
+        }
+    
+        create_resp = client.post(
+            "/api/interview/session/create",
+            json={
+                "jdText": "��λҪ��Python FastAPI SQL Docker Redis",
+                "resumeText": "3���˿�������Ϥ Python FastAPI SQL Docker��",
+                "questionCount": 3,
+            },
+            headers=session_headers,
+        )
+        assert create_resp.status_code == 200
+    
+        create_data = create_resp.json()
+        session_id = create_data["session"]["id"]
+        assert create_data["session"]["status"] == "active"
+        assert create_data["session"]["questionCount"] == 3
+        assert create_data["nextQuestion"] is not None
+    
+        list_resp = client.get("/api/interview/sessions", headers={"x-session-id": "session-interview-owner-a"})
+        assert list_resp.status_code == 200
+>       assert any(item["id"] == session_id for item in list_resp.json()["items"])
+E       assert False
+E        +  where False = any(<generator object test_interview_list_detail_pause_resume_and_answer_chain.<locals>.<genexpr> at 0x000002C93A1A3760>)
+
+tests\test_api.py:688: AssertionError
+___________ test_interview_session_api_minimal_chain_when_supported ___________
+
+    def test_interview_session_api_minimal_chain_when_supported() -> None:
+        spec = _openapi()
+        create_path, detail_path, turn_path = _find_interview_paths(spec)
+        if not create_path:
+            pytest.skip("Interview session API is not exposed in current OpenAPI paths")
+    
+        create_operation = spec["paths"][create_path]["post"]
+        create_payload_schema = _extract_json_schema(spec, create_operation)
+        create_payload = _build_min_value(spec, create_payload_schema) if create_payload_schema else {}
+        if not isinstance(create_payload, dict):
+            create_payload = {}
+    
+        create_resp = client.post(create_path, json=create_payload)
+        assert create_resp.status_code in {200, 201}, create_resp.text
+    
+        created = create_resp.json() if create_resp.headers.get("content-type", "").startswith("application/json") else {}
+        session_id = _extract_session_id(created)
+        assert session_id is not None, f"cannot locate session id in create response: {created}"
+    
+        if detail_path:
+            detail_resp = client.get(_fill_session_path(detail_path, session_id))
+>           assert detail_resp.status_code in {200, 204}, detail_resp.text
+E           AssertionError: {"code":"NOT_FOUND","message":"interview session not found","requestId":"9940d468-a549-4826-8539-ddad7241514c"}
+E           assert 404 in {200, 204}
+E            +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_prd_followup_gate.py:296: AssertionError
+___________ test_interview_list_detail_pause_resume_when_supported ____________
+
+    def test_interview_list_detail_pause_resume_when_supported() -> None:
+        spec = _openapi()
+        create_path, list_path, detail, pause, resume = _find_interview_lifecycle_paths(spec)
+    
+        missing = [
+            name
+            for name, value in (
+                ("create", create_path),
+                ("list", list_path),
+                ("detail", detail),
+                ("pause", pause),
+                ("resume", resume),
+            )
+            if value is None
+        ]
+        if missing:
+            pytest.skip(f"interview list/detail/pause/resume APIs not fully exposed: missing {', '.join(missing)}")
+    
+        create_operation = spec["paths"][create_path]["post"]
+        create_schema = _extract_json_schema(spec, create_operation)
+        create_payload = _build_min_value(spec, create_schema) if create_schema else {}
+        if not isinstance(create_payload, dict):
+            create_payload = {}
+    
+        create_resp = client.post(create_path, json=create_payload)
+        assert create_resp.status_code in {200, 201}, create_resp.text
+    
+        created = create_resp.json() if create_resp.headers.get("content-type", "").startswith("application/json") else {}
+        session_id = _extract_session_id(created)
+        assert session_id is not None
+    
+        list_resp = client.get(list_path)
+        assert list_resp.status_code == 200, list_resp.text
+    
+        detail_path, detail_method = detail
+        detail_resp = _call_operation_with_min_payload(
+            spec=spec,
+            method=detail_method,
+            path=detail_path,
+            session_id=session_id,
+        )
+>       assert detail_resp.status_code in {200, 204}, detail_resp.text
+E       AssertionError: {"code":"NOT_FOUND","message":"interview session not found","requestId":"594da7a2-716d-4d5d-9e34-779f4d6f2db8"}
+E       assert 404 in {200, 204}
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_prd_followup_gate.py:403: AssertionError
+________________ test_wave5_auth_login_chain_contract_and_flow ________________
+
+    def test_wave5_auth_login_chain_contract_and_flow() -> None:
+        spec = _openapi()
+        required = [
+            ("post", "/api/auth/session/guest"),
+            ("get", "/api/auth/session/current"),
+            ("post", "/api/auth/session/refresh"),
+            ("post", "/api/auth/session/logout"),
+        ]
+    
+        missing = [
+            f"{method.upper()} {path}"
+            for method, path in required
+            if method not in spec.get("paths", {}).get(path, {})
+        ]
+>       assert not missing, (
+            "Wave5 blocker: auth session/login chain APIs missing from OpenAPI: "
+            + ", ".join(missing)
+        )
+E       AssertionError: Wave5 blocker: auth session/login chain APIs missing from OpenAPI: POST /api/auth/session/guest, GET /api/auth/session/current, POST /api/auth/session/refresh, POST /api/auth/session/logout
+E       assert not ['POST /api/auth/session/guest', 'GET /api/auth/session/current', 'POST /api/auth/session/refresh', 'POST /api/auth/session/logout']
+
+tests\test_prd_followup_gate.py:494: AssertionError
+_____________ test_wave5_session_isolation_history_and_interview ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002C93A6A4350>
+
+    def test_wave5_session_isolation_history_and_interview(monkeypatch) -> None:
+        monkeypatch.setenv("CAREER_HERO_SESSION_ISOLATION_ENABLED", "true")
+    
+        headers_a = {"x-session-id": "wave5-session-a", "x-request-id": "wave5-iso-a"}
+        headers_b = {"x-session-id": "wave5-session-b", "x-request-id": "wave5-iso-b"}
+    
+        analyze_a = client.post("/api/analyze", json=make_payload(701), headers=headers_a)
+        assert analyze_a.status_code == 200
+        history_id_a = analyze_a.json()["historyId"]
+    
+        analyze_b = client.post("/api/analyze", json=make_payload(702), headers=headers_b)
+        assert analyze_b.status_code == 200
+        history_id_b = analyze_b.json()["historyId"]
+    
+        history_a = client.get("/api/history?limit=20", headers=headers_a)
+        assert history_a.status_code == 200
+        ids_a = {item["id"] for item in history_a.json()["items"]}
+        assert history_id_a in ids_a
+        assert history_id_b not in ids_a
+    
+        history_b = client.get("/api/history?limit=20", headers=headers_b)
+        assert history_b.status_code == 200
+        ids_b = {item["id"] for item in history_b.json()["items"]}
+        assert history_id_b in ids_b
+        assert history_id_a not in ids_b
+    
+        foreign_history_detail = client.get(f"/api/history/{history_id_a}", headers=headers_b)
+        assert foreign_history_detail.status_code == 404
+        assert_error_shape(foreign_history_detail.json())
+    
+        create_interview_a = client.post(
+            "/api/interview/session/create",
+            json={
+                "jdText": "��λҪ��Python FastAPI SQL Docker Redis",
+                "resumeText": "5���˿������飬��Ϥ Python FastAPI SQL Docker��",
+                "questionCount": 3,
+            },
+            headers=headers_a,
+        )
+        assert create_interview_a.status_code == 200
+        interview_id_a = create_interview_a.json()["session"]["id"]
+    
+        create_interview_b = client.post(
+            "/api/interview/session/create",
+            json={
+                "jdText": "��λҪ��Python FastAPI SQL Docker Redis",
+                "resumeText": "4���˿������飬��Ϥ Python FastAPI SQL Docker��",
+                "questionCount": 3,
+            },
+            headers=headers_b,
+        )
+        assert create_interview_b.status_code == 200
+        interview_id_b = create_interview_b.json()["session"]["id"]
+    
+        list_a = client.get("/api/interview/sessions", headers=headers_a)
+        assert list_a.status_code == 200
+        interview_ids_a = {item["id"] for item in list_a.json()["items"]}
+>       assert interview_id_a in interview_ids_a
+E       assert 1 in set()
+
+tests\test_prd_followup_gate.py:604: AssertionError
+____________ test_wave5_knowledge_update_delete_contract_and_flow _____________
+
+    def test_wave5_knowledge_update_delete_contract_and_flow() -> None:
+        spec = _openapi()
+        path, update_method, delete_method = _find_knowledge_update_delete_path(spec)
+>       assert path and update_method and delete_method, (
+            "Wave5 blocker: knowledge update/delete APIs missing. "
+            "Require PUT/PATCH + DELETE on /api/rag/knowledge/{id}."
+        )
+E       AssertionError: Wave5 blocker: knowledge update/delete APIs missing. Require PUT/PATCH + DELETE on /api/rag/knowledge/{id}.
+E       assert (None)
+
+tests\test_prd_followup_gate.py:621: AssertionError
+_______________ test_wave5_interview_history_finished_sessions ________________
+
+    def test_wave5_interview_history_finished_sessions() -> None:
+        owner_headers = {
+            "x-session-id": "wave5-interview-owner-1",
+            "x-request-id": "wave5-interview-history-create",
+        }
+    
+        create_resp = client.post(
+            "/api/interview/session/create",
+            json={
+                "jdText": "��λҪ��Python FastAPI SQL Docker Redis",
+                "resumeText": "4���˿������飬��Ϥ Python FastAPI SQL Docker��",
+                "questionCount": 3,
+            },
+            headers=owner_headers,
+        )
+        assert create_resp.status_code == 200
+    
+        session_id = create_resp.json()["session"]["id"]
+        assert isinstance(session_id, int)
+    
+        answer_resp = client.post(
+            f"/api/interview/session/{session_id}/answer",
+            json={
+                "answerText": "�һ�����ƿ����λ���ٲ��� Redis ���桢SQL ������ѹ�����ݡ�",
+                "questionIndex": 0,
+            },
+            headers={"x-session-id": owner_headers["x-session-id"], "x-request-id": "wave5-interview-history-answer"},
+        )
+        assert answer_resp.status_code == 200
+    
+        finish_resp = client.post(
+            f"/api/interview/session/{session_id}/finish",
+            headers={"x-session-id": owner_headers["x-session-id"], "x-request-id": "wave5-interview-history-finish"},
+        )
+        assert finish_resp.status_code == 200
+        finish_payload = finish_resp.json()
+        assert finish_payload["session"]["status"] == "finished"
+        assert isinstance(finish_payload["feedbackDraft"]["overallScore"], int)
+    
+        history_resp = client.get(
+            "/api/interview/sessions?status=finished&limit=20",
+            headers={"x-session-id": owner_headers["x-session-id"], "x-request-id": "wave5-interview-history-list"},
+        )
+        assert history_resp.status_code == 200
+        history_items = history_resp.json()["items"]
+        target = next((item for item in history_items if item["id"] == session_id), None)
+>       assert target is not None, "finished interview session should appear in interview history list"
+E       AssertionError: finished interview session should appear in interview history list
+E       assert None is not None
+
+tests\test_prd_followup_gate.py:722: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_api.py::test_interview_list_detail_pause_resume_and_answer_chain
+FAILED tests/test_prd_followup_gate.py::test_interview_session_api_minimal_chain_when_supported
+FAILED tests/test_prd_followup_gate.py::test_interview_list_detail_pause_resume_when_supported
+FAILED tests/test_prd_followup_gate.py::test_wave5_auth_login_chain_contract_and_flow
+FAILED tests/test_prd_followup_gate.py::test_wave5_session_isolation_history_and_interview
+FAILED tests/test_prd_followup_gate.py::test_wave5_knowledge_update_delete_contract_and_flow
+FAILED tests/test_prd_followup_gate.py::test_wave5_interview_history_finished_sessions
+7 failed, 29 passed in 2.23s
+
+## STDERR
+

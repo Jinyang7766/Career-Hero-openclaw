@@ -1,0 +1,16 @@
+[
+  {
+    "Step": "backend pytest",
+    "Status": "FAIL",
+    "ExitCode": 1,
+    "DurationSec": 3.11,
+    "LogFile": "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260225-132945\\backend-pytest-20260225-132945.log"
+  },
+  {
+    "Step": "frontend build",
+    "Status": "FAIL",
+    "ExitCode": 1,
+    "DurationSec": 0.16,
+    "LogFile": "G:\\AI_project\\career-hero-mvp-next-fastapi\\scripts\\logs\\20260225-132945\\frontend-build-20260225-132945.log"
+  }
+]

@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-02-25T15:28:21.655016",
+  "frontendBaseUrl": "http://127.0.0.1:3000",
+  "backendBaseUrl": "http://127.0.0.1:8000",
+  "authenticated": true,
+  "authUser": "demo",
+  "summary": {
+    "total": 6,
+    "passed": 0,
+    "failed": 6,
+    "status": "FAIL"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "url": "http://127.0.0.1:3000/",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-152812\\01-home.png",
+      "status": "FAIL",
+      "duration_ms": 1503,
+      "expected_text": [
+        "Career Hero MVP",
+        "分析输入"
+      ],
+      "missing_text": [
+        "Career Hero MVP",
+        "分析输入"
+      ],
+      "notes": [
+        "missing expected text: Career Hero MVP, 分析输入"
+      ]
+    },
+    {
+      "route": "/resumes",
+      "url": "http://127.0.0.1:3000/resumes",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-152812\\02-resumes.png",
+      "status": "FAIL",
+      "duration_ms": 1399,
+      "expected_text": [
+        "Resume 管理",
+        "简历列表"
+      ],
+      "missing_text": [
+        "Resume 管理",
+        "简历列表"
+      ],
+      "notes": [
+        "missing expected text: Resume 管理, 简历列表"
+      ]
+    },
+    {
+      "route": "/rag",
+      "url": "http://127.0.0.1:3000/rag",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-152812\\03-rag.png",
+      "status": "FAIL",
+      "duration_ms": 1604,
+      "expected_text": [
+        "RAG / 知识库管理",
+        "知识条目列表"
+      ],
+      "missing_text": [
+        "RAG / 知识库管理",
+        "知识条目列表"
+      ],
+      "notes": [
+        "missing expected text: RAG / 知识库管理, 知识条目列表"
+      ]
+    },
+    {
+      "route": "/interview",
+      "url": "http://127.0.0.1:3000/interview",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-152812\\04-interview.png",
+      "status": "FAIL",
+      "duration_ms": 1425,
+      "expected_text": [
+        "Interview 练习",
+        "开始会话"
+      ],
+      "missing_text": [
+        "Interview 练习",
+        "开始会话"
+      ],
+      "notes": [
+        "missing expected text: Interview 练习, 开始会话"
+      ]
+    },
+    {
+      "route": "/interview/summary",
+      "url": "http://127.0.0.1:3000/interview/summary",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-152812\\05-interview-summary.png",
+      "status": "FAIL",
+      "duration_ms": 1383,
+      "expected_text": [
+        "面试最终总结页",
+        "会话列表"
+      ],
+      "missing_text": [
+        "面试最终总结页",
+        "会话列表"
+      ],
+      "notes": [
+        "missing expected text: 面试最终总结页, 会话列表"
+      ]
+    },
+    {
+      "route": "/login",
+      "url": "http://127.0.0.1:3000/login",
+      "file": "G:\\AI_project\\career-hero-mvp-next-fastapi\\screenshots\\wave7-usability-20260225-152812\\06-login.png",
+      "status": "FAIL",
+      "duration_ms": 1385,
+      "expected_text": [
+        "登录 / 退出",
+        "登录表单"
+      ],
+      "missing_text": [
+        "登录 / 退出",
+        "登录表单"
+      ],
+      "notes": [
+        "missing expected text: 登录 / 退出, 登录表单"
+      ]
+    }
+  ]
+}

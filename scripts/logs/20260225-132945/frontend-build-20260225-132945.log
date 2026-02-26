@@ -1,0 +1,14 @@
+# frontend build
+
+## STDOUT
+
+
+## STDERR
+
+Start-Process: G:\AI_project\career-hero-mvp-next-fastapi\scripts\check.ps1:73
+Line |
+  73 |          $proc = Start-Process `
+     |                  ~~~~~~~~~~~~~~~
+     | This command cannot be run due to the error: %1 不是有效的 Win32 应用程序。
+
+

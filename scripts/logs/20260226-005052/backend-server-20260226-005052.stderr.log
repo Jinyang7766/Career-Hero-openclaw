@@ -1,0 +1,10 @@
+INFO:     Started server process [4764]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+{"path": "/health", "method": "GET", "status": 200, "duration_ms": 1, "requestId": "47a46b63-ee3f-4472-9a71-8ad23b637b1a", "sessionId": "1831db80-9698-41fd-9706-23efec4c31e4", "error_code": null, "exception_type": null}
+{"path": "/health", "method": "GET", "status": 200, "duration_ms": 0, "requestId": "4b67a025-4441-4d1e-a940-78b206aa5ee3", "sessionId": "a1baf486-e279-4ee8-83ca-422f175a92c7", "error_code": null, "exception_type": null}
+{"path": "/api/auth/login", "method": "POST", "status": 200, "duration_ms": 88, "requestId": "e2e-auth-login", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/rag/knowledge", "method": "POST", "status": 200, "duration_ms": 10, "requestId": "e2e-knowledge-1", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/rag/knowledge", "method": "POST", "status": 200, "duration_ms": 7, "requestId": "e2e-knowledge-2", "sessionId": "e2e-smoke-auth", "error_code": null, "exception_type": null}
+{"path": "/api/analyze", "method": "POST", "status": 401, "duration_ms": 1, "requestId": "e2e-analyze-off", "sessionId": "e2e-smoke-session", "error_code": "UNAUTHORIZED", "exception_type": "InvalidSessionToken"}

@@ -1,0 +1,2 @@
+[PASS] interview list/detail/pause/resume
+[BLOCKER] report-page back-route guard missing snippets: ['matched?.prefix === "/interview/summary"', 'searchParams.get("sessionId")', 'searchParams.get("sessionKey")', 'sectionHref: next.toString() ? `/interview?${next.toString()}` : "/interview"']

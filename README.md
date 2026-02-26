@@ -9,12 +9,16 @@
 
 > 截图目录：`docs/screenshots/wave14-no-indicator/`
 
-![Wave14 首页](docs/screenshots/wave14-no-indicator/01-home.png)
-![Wave14 简历页](docs/screenshots/wave14-no-indicator/02-resumes.png)
-![Wave14 RAG 页](docs/screenshots/wave14-no-indicator/03-rag.png)
-![Wave14 面试页](docs/screenshots/wave14-no-indicator/04-interview.png)
-![Wave14 面试总结页](docs/screenshots/wave14-no-indicator/05-interview-summary.png)
-![Wave14 登录页](docs/screenshots/wave14-no-indicator/06-login.png)
+<p>
+  <a href="docs/screenshots/wave14-no-indicator/01-home.png"><img src="docs/screenshots/wave14-no-indicator/small/01-home-sm.png" alt="Wave14 首页" width="180" /></a>
+  <a href="docs/screenshots/wave14-no-indicator/02-resumes.png"><img src="docs/screenshots/wave14-no-indicator/small/02-resumes-sm.png" alt="Wave14 简历页" width="180" /></a>
+  <a href="docs/screenshots/wave14-no-indicator/03-rag.png"><img src="docs/screenshots/wave14-no-indicator/small/03-rag-sm.png" alt="Wave14 RAG 页" width="180" /></a>
+</p>
+<p>
+  <a href="docs/screenshots/wave14-no-indicator/04-interview.png"><img src="docs/screenshots/wave14-no-indicator/small/04-interview-sm.png" alt="Wave14 面试页" width="180" /></a>
+  <a href="docs/screenshots/wave14-no-indicator/05-interview-summary.png"><img src="docs/screenshots/wave14-no-indicator/small/05-interview-summary-sm.png" alt="Wave14 面试总结页" width="180" /></a>
+  <a href="docs/screenshots/wave14-no-indicator/06-login.png"><img src="docs/screenshots/wave14-no-indicator/small/06-login-sm.png" alt="Wave14 登录页" width="180" /></a>
+</p>
 
 ---
 

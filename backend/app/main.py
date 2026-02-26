@@ -2575,11 +2575,29 @@ def log_request_event(
     )
 
 
+def get_cors_allow_origins() -> list[str]:
+    raw = os.getenv("CAREER_HERO_CORS_ALLOW_ORIGINS", "").strip()
+    if raw:
+        return [item.strip() for item in raw.split(",") if item.strip()]
+    return [
+        "http://127.0.0.1:3000",
+        "http://localhost:3000",
+    ]
+
+
+def get_cors_allow_origin_regex() -> str | None:
+    raw = os.getenv("CAREER_HERO_CORS_ALLOW_ORIGIN_REGEX", "").strip()
+    if raw:
+        return raw
+    return r"^https://.*\.vercel\.app$"
+
+
 app = FastAPI(title="Career Hero MVP API", version="0.2.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=get_cors_allow_origins(),
+    allow_origin_regex=get_cors_allow_origin_regex(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

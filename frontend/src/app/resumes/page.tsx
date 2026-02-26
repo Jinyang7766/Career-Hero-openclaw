@@ -174,6 +174,9 @@ export default function ResumesPage() {
     try {
       const response = await fetch(`${API_BASE_URL}/api/resumes?limit=50`);
       const data = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        return;
+      }
       if (!response.ok) {
         throw new Error((isRecord(data) && toString(data.message)) || "简历列表加载失败");
       }
@@ -194,6 +197,9 @@ export default function ResumesPage() {
     try {
       const response = await fetch(`${API_BASE_URL}/api/resumes/${id}`);
       const data = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        return;
+      }
       if (!response.ok) {
         throw new Error((isRecord(data) && toString(data.message)) || "简历详情加载失败");
       }
@@ -221,6 +227,9 @@ export default function ResumesPage() {
         body: JSON.stringify({ title, content }),
       });
       const data = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        return;
+      }
       if (!response.ok) {
         throw new Error((isRecord(data) && toString(data.message)) || "简历创建失败");
       }
@@ -263,8 +272,9 @@ export default function ResumesPage() {
   }
 
   useEffect(() => {
+    if (!authReady || !isAuthenticated) return;
     void loadList();
-  }, []);
+  }, [authReady, isAuthenticated]);
 
   useEffect(() => {
     if (!authReady || isAuthenticated || canAttemptRefresh) return;
